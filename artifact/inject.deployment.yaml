@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: inject
+  name: inject
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: inject
+  template:
+    metadata:
+      labels:
+        run: inject
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - while true; do for i in $(seq 10); do (curl http://hello:80/ &); done; sleep 2; done;
+        image: docker.io/istio/proxy_debug:0.2.12
+        imagePullPolicy: IfNotPresent
+        name: inject
