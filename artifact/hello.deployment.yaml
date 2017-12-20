@@ -15,9 +15,12 @@ spec:
         run: hello
     spec:
       containers:
-      - image: dbenque/helloserver:v0
+      - image: dbenque/helloserver:v2
         imagePullPolicy: IfNotPresent
         name: hello
+        env:
+        - name: SLEEP
+          value: 10
         ports:
         - containerPort: 80
           protocol: TCP

@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
+	"strconv"
 	"time"
 )
 
@@ -12,8 +14,16 @@ func main() {
 	fmt.Println("Build at " + btime)
 	//if len(os.Args) == 2 && os.Args[1] == "--server" {
 
+	seconds := 1
+	seconds, err := strconv.Atoi(os.Getenv("SLEEP"))
+	if err != nil {
+		seconds = 1
+	}
+
+	fmt.Printf("Handler will sleep for %d second(s)", seconds)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		time.Sleep(time.Second)
+		time.Sleep(time.Duration(seconds) * time.Second)
 		w.Write([]byte("Hello"))
 		return
 	})

@@ -5,7 +5,7 @@ if [ ! $? -eq 0 ]; then
  exit 1
 fi
 
-IMGVERSION=v1
+IMGVERSION=v2
 
 docker build -t dbenque/helloserver:$IMGVERSION .
 if [ ! $? -eq 0 ]; then

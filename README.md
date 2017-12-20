@@ -19,3 +19,5 @@ kubectl apply -f <(istioctl kube-inject -f artifact/inject.deployment.yaml)
 podname=$(k get pod -l run=inject -ojsonpath={.items[0].metadata.name})
 helloip=$(k get pod -l run=hello -ojsonpath={.items[0].status.podIP})
 ```
+
+while true; do ss -atp | grep -v TIME; sleep 1; done
